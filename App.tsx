@@ -4,8 +4,8 @@ import './style.css';
 export default function App() {
   return (
     <div>
-      <h1>Hello StackBlitz!</h1>
-      <p>Start editing to see some magic happen :)</p>
+      <h1>Hola VUVib!</h1>
+      <p>Vamos a generar un archivo de prueba:)</p>
     </div>
   );
 }

@@ -1,13 +1,25 @@
-import React, { Component } from "react";
-import { render } from "react-dom";
-import Hello from "./Hello";
-import "./style.css";
-
-import { saveAs } from "file-saver";
-import { Document, ImageRun, Packer, Paragraph, Header, Footer } from "docx";
-import { Footer, Header } from "docx/build/file/header";
-
-const imageBase64Data = `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`;
+import React, { Component } from 'react';
+import { render } from 'react-dom';
+import Hello from './Hello';
+import './style.css';
+import { saveAs } from 'file-saver';
+import {
+  Document,
+  ImageRun,
+  Packer,
+  Paragraph,
+  Header,
+  Footer,
+  Table,
+  TableCell,
+  TableRow,
+  VerticalAlign,
+  WidthType,
+} from 'docx';
+import { Footer, Header } from 'docx/build/file/header';
+import { TableRow } from 'docx/build/file/TableRow';
+import { TableCell } from 'docx/build/file/TableCell';
+import ReactFileReader from 'react-file-reader';
 
 interface AppProps {}
 interface AppState {
@@ -18,89 +30,192 @@ class App extends Component<AppProps, AppState> {
   constructor(props) {
     super(props);
     this.state = {
-      name: "React"
+      name: 'VUVib',
     };
   }
 
-  generate(): void {
-    const image = doc.createImage("c:/");
-    const doc = new Document({
-      sections: [
-        {
-          children: [
-            new Paragraph("Hola camaron sin cola"),
-            new Paragraph({
-              children: [
-                new ImageRun({
-                  data: Uint8Array.from(atob(imageBase64Data), c =>
-                    c.charCodeAt(0)
-                  ),
-                  transformation: {
-                    width: 200,
-                    height: 100
-                  }
-                })
-              ]
-            })
-          ]
-        }
-      ]
-    });
-
-    Packer.toBlob(doc).then(blob => {
-      console.log(blob);
-      saveAs(blob, "example.docx");
-      console.log("Document created successfully");
-    });
-  }
-
+  onFileChange = (e) => {
+    const archivoTexto = e.target.files[0];
+    var file = new FileReader();
+    console.log(file);
+    file.onload = (e) => {
+      console.log(file.result);
+    };
+    file.readAsText(archivoTexto);
+  };
 
   async generateFromUrl() {
     const blob = await fetch(
-      "https://raw.githubusercontent.com/dolanmiu/docx/master/demo/images/cat.jpg"
-    ).then(r => r.blob());
+      'https://raw.githubusercontent.com/dolanmiu/docx/master/demo/images/cat.jpg'
+    ).then((r) => r.blob());
+
+    const texto = 'CONSIDERANDO: Que ..... RESUELVE';
+    const articulo1 =
+      'Artículo 1.- Otorgar a [NOMBRE DEL SOLICITANTE] la autorización para desarrollar la investigación [TÍTULO DEL PROYECTO] por el plazo de [PLAZO DEL PROYECTO].';
+    const disposiciones = 'DISPOSICONES FINALES';
+    const nombre = 'NOMBRE';
+    const cargo = 'CARGO';
+    const sumilla = 'Acción Nombre y Apellido Sumilla o firma Fecha';
+    const elaboradopor = 'Elaborado por';
+    const revisadopor = 'Elaborado por';
+    const aprobadopor = 'Elaborado por';
+    const myTexto = 'HOLA A TODOS';
+
+    const archivoTexto = (event) => {
+      var file = new FileReader();
+      console.log(file);
+      file.onload = (e) => {
+        console.log(file.result);
+      };
+      file.readAsText(archivoTexto);
+    };
 
     const doc = new Document({
       sections: [
         {
           headers: {
             default: new Header({
-                children: [
-                  new Paragraph("Encabezado")
-                ],
+              children: [
+                new Table({
+                  rows: [
+                    new TableRow({
+                      children: [
+                        new TableCell({
+                          //verticalAlign: VerticalAlign.LEFT,
+                          //width: { size: 150 }, //, type: WidthType.PERCENTAGE },
+                          children: [
+                            // new Paragraph({
+                            //   children: [
+                            //     new ImageRun({
+                            //       data: blob,
+                            //       transformation: {
+                            //         width: 100,
+                            //         height: 100,
+                            //       },
+                            //     }),
+                            //   ],
+                            // }),
+                            new Paragraph('Aqui va el escudo nacional'),
+                          ],
+                          //children: [new Paragraph("Aqui va el escudo nacional")],
+                        }),
+                        new TableCell({
+                          //verticalAlign: VerticalAlign.RIGHT,
+                          //width: { size: 150 }, //, type: WidthType.PERCENTAGE },
+                          children: [
+                            // new Paragraph({
+                            //   children: [
+                            //     new ImageRun({
+                            //       data: blob,
+                            //       transformation: {
+                            //         width: 100,
+                            //         height: 100,
+                            //       },
+                            //     }),
+                            //   ],
+                            // }),
+                            new Paragraph('Aqui va el logo de senescyt'),
+                          ],
+                          //children: [new Paragraph("Aquí va el logo de senescyt")],
+                        }),
+                      ],
+                    }),
+                  ],
+                }),
+              ],
             }),
           },
           footers: {
             default: new Footer({
-                children: [
-                  new Paragraph("pie")
-                ],
+              children: [
+                new Paragraph(
+                  'Dirección: Edificio Matriz: Alpallana E7-183 entre Av. Diego de Almagro y Whymper'
+                ),
+                new Paragraph('Código Postal: 170518 / Quito - Ecuador'),
+                new Paragraph('Teléfono: 593-2 3934-300'),
+              ],
             }),
           },
           children: [
-            new Paragraph("Hello World"),
-            new Paragraph({
-              children: [
-                new ImageRun({
-                  data: blob,
-                  transformation: {
-                    width: 100,
-                    height: 100
-                  }
-                })
-              ]
-            })
-          ]
-        }
-      ]
+            new Paragraph(''),
+            new Paragraph(''),
+            new Paragraph(''),
+            new Paragraph(archivoTexto),
+            new Paragraph(''),
+            new Paragraph(''),
+            new Paragraph(articulo1),
+            new Paragraph(''),
+            new Paragraph(''),
+            new Paragraph(disposiciones),
+            new Paragraph(''),
+            new Paragraph(''),
+            new Paragraph(nombre),
+            new Paragraph(''),
+            new Paragraph(''),
+            new Paragraph(cargo),
+            new Paragraph(''),
+            new Paragraph(''),
+            new Paragraph(sumilla),
+            new Paragraph(''),
+            new Paragraph(''),
+            new Paragraph(elaboradopor),
+            new Paragraph(''),
+            new Paragraph(''),
+            new Paragraph(revisadopor),
+            new Paragraph(''),
+            new Paragraph(''),
+            new Paragraph(aprobadopor),
+
+            // new Paragraph({
+            //   children: [
+            //     new ImageRun({
+            //       data: blob,
+            //       transformation: {
+            //         width: 100,
+            //         height: 100
+            //       }
+            //     })
+            //   ]
+            // })
+          ],
+        },
+      ],
     });
 
-    Packer.toBlob(doc).then(blob => {
+    Packer.toBlob(doc).then((blob) => {
       console.log(blob);
-      saveAs(blob, "example.docx");
-      console.log("Document created successfully");
+      saveAs(blob, 'example.docx');
+      console.log('Documento creado exitosamente');
     });
 
+    function tablaDatos(props) {
+      const table = new Table({
+        rows: [
+          new TableRow({
+            children: [
+              new TableCell({
+                children: [new Paragraph(props.cabeceradepagina)],
+              }),
+              new TableCell({
+                children: [],
+              }),
+            ],
+          }),
+          new TableRow({
+            children: [
+              new TableCell({
+                children: [],
+              }),
+              new TableCell({
+                children: [new Paragraph(props.piedepagina)],
+              }),
+            ],
+          }),
+        ],
+      });
+
+      return;
+    }
   }
 
   render() {
@@ -108,17 +223,26 @@ class App extends Component<AppProps, AppState> {
       <div>
         <Hello name={this.state.name} />
         <p>
-          Start editing to see some magic happen :)
           {/* <button onClick={this.generate}>
             Generate doc with base64 image!
           </button> */}
-          <button onClick={this.generateFromUrl}>
-            Generate doc with URL image!
-          </button>
+
+          <form>
+            <p>Subir archivo :</p>
+            <input onChange={this.onFileChange} type="file" />
+          </form>
+
+          {/* <form>
+            <p>Subir imagen</p>
+            <input type="file" id="image" onChange={this.onImageChange}accept=".png, .jpg, .jpeg'"/>
+            <img src={img} alt="" />
+          </form> */}
+
+          <button onClick={this.generateFromUrl}>Generar documento</button>
         </p>
       </div>
     );
   }
 }
 
-render(<App />, document.getElementById("root"));
+render(<App />, document.getElementById('root'));

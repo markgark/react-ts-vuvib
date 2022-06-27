@@ -81,8 +81,6 @@ class App extends Component<AppProps, AppState> {
                     new TableRow({
                       children: [
                         new TableCell({
-                          //verticalAlign: VerticalAlign.LEFT,
-                          //width: { size: 150 }, //, type: WidthType.PERCENTAGE },
                           children: [
                             // new Paragraph({
                             //   children: [
@@ -100,8 +98,6 @@ class App extends Component<AppProps, AppState> {
                           //children: [new Paragraph("Aqui va el escudo nacional")],
                         }),
                         new TableCell({
-                          //verticalAlign: VerticalAlign.RIGHT,
-                          //width: { size: 150 }, //, type: WidthType.PERCENTAGE },
                           children: [
                             // new Paragraph({
                             //   children: [

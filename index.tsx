@@ -121,6 +121,10 @@ class App extends Component<AppProps, AppState> {
                       ],
                     }),
                   ],
+                  width: {
+                    size: 100,
+                    type: WidthType.PERCENTAGE,
+                  },
                 }),
               ],
             }),

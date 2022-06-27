@@ -45,8 +45,12 @@ class App extends Component<AppProps, AppState> {
   };
 
   async generateFromUrl() {
+    // const blob = await fetch(
+    //   'https://raw.githubusercontent.com/dolanmiu/docx/master/demo/images/cat.jpg'
+    // ).then((r) => r.blob());
+
     const blob = await fetch(
-      'https://raw.githubusercontent.com/dolanmiu/docx/master/demo/images/cat.jpg'
+    'https://github.com/markgark/logos-vuvib/blob/main/republica-ecuador-escudo.png'
     ).then((r) => r.blob());
 
     const texto = 'CONSIDERANDO: Que ..... RESUELVE';

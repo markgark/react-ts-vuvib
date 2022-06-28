@@ -17,6 +17,7 @@ import {
   WidthType,
   BorderStyle,
   TextRun,
+  TableBorders
 } from 'docx';
 import { Footer, Header } from 'docx/build/file/header';
 import { TableRow } from 'docx/build/file/TableRow';
@@ -24,6 +25,8 @@ import { TableCell } from 'docx/build/file/TableCell';
 import ReactFileReader from 'react-file-reader';
 import { useState } from 'react';
 import { HorizontalPositionRelativeFrom } from 'docx/build/file/drawing/floating/floating-position';
+import { Alignment, AlignmentType } from 'docx/build/file/paragraph/formatting/alignment';
+import { Align } from 'docx/build/file/drawing/floating/align';
 
 interface AppProps {}
 interface AppState {
@@ -149,6 +152,9 @@ class App extends Component<AppProps, AppState> {
                     right: {
                       style: BorderStyle.NONE,
                     },
+                    insideVertical: {
+                      style: BorderStyle.NONE,
+                    }
                   },
                 }),
               ],
@@ -170,9 +176,9 @@ class App extends Component<AppProps, AppState> {
                                 new TextRun({
                                   text: "Dirección: Edificio Matriz: Alpallana E7-183 entre Av. Diego de Almagro y Whymper",
                                   font: "Arial",
-                                  size: 12
+                                  size: 12,
                                 }),
-                              ]
+                              ],
                             }),
                             new Paragraph({
                               children:[
@@ -193,6 +199,7 @@ class App extends Component<AppProps, AppState> {
                               ]
                             }),
                           ],
+                          verticalAlign: VerticalAlign.CENTER,
                         }),
                         new TableCell({
                           children: [
@@ -206,7 +213,7 @@ class App extends Component<AppProps, AppState> {
                                   },
                                 }),
                               ],
-                              //HorizontalPositionAlign: HorizontalPositionAlign.RIGHT,
+                              // alineación de la figura a la derecha
                             }),
                           ],
                           verticalAlign: VerticalAlign.CENTER,
@@ -231,6 +238,9 @@ class App extends Component<AppProps, AppState> {
                     right: {
                       style: BorderStyle.NONE,
                     },
+                    insideVertical: {
+                      style: BorderStyle.NONE,
+                    }
                   },
                 }),
               ],

@@ -15,11 +15,13 @@ import {
   TableRow,
   VerticalAlign,
   WidthType,
+  BorderStyle,
 } from 'docx';
 import { Footer, Header } from 'docx/build/file/header';
 import { TableRow } from 'docx/build/file/TableRow';
 import { TableCell } from 'docx/build/file/TableCell';
 import ReactFileReader from 'react-file-reader';
+import { useState } from 'react';
 
 interface AppProps {}
 interface AppState {
@@ -49,10 +51,18 @@ class App extends Component<AppProps, AppState> {
     //   'https://raw.githubusercontent.com/dolanmiu/docx/master/demo/images/cat.jpg'
     // ).then((r) => r.blob());
 
-    const blob = await fetch(
-    'https://github.com/markgark/logos-vuvib/blob/main/republica-ecuador-escudo.png'
-    ).then((r) => r.blob());
-
+    // const escudo = await fetch(
+    //   'https://cdn.jsdelivr.net/gh/markgark/react-ts-vuvib@main/imagenes/gobierno-de-todos.png'
+    //   ).then((r) => r.blob())
+  
+    // const senescyt = await fetch(
+    //     'https://cdn.jsdelivr.net/gh/markgark/react-ts-vuvib@main/imagenes/logo-senecsyt.jpeg'
+    // ).then((r) => r.blob());
+  
+    // const gobiernodetodos = await fetch(
+    //     'https://cdn.jsdelivr.net/gh/markgark/react-ts-vuvib@main/imagenes/gobierno-de-todos.png'
+    // ).then((r) => r.blob());
+     
     const texto = 'CONSIDERANDO: Que ..... RESUELVE';
     const articulo1 =
       'Artículo 1.- Otorgar a [NOMBRE DEL SOLICITANTE] la autorización para desarrollar la investigación [TÍTULO DEL PROYECTO] por el plazo de [PLAZO DEL PROYECTO].';
@@ -97,7 +107,14 @@ class App extends Component<AppProps, AppState> {
                             //     }),
                             //   ],
                             // }),
-                            new Paragraph('Aqui va el escudo nacional'),
+                            // new ImageRun({
+                            //   data: escudo,
+                            //   transformation: {
+                            //       width: 25,
+                            //       height: 25,
+                            //   },
+                            // }),
+                            new Paragraph('Aquisito va el escudo nacional'),
                           ],
                           //children: [new Paragraph("Aqui va el escudo nacional")],
                         }),
@@ -124,6 +141,20 @@ class App extends Component<AppProps, AppState> {
                   width: {
                     size: 100,
                     type: WidthType.PERCENTAGE,
+                  },
+                  borders: {
+                    top: {
+                      style: BorderStyle.NONE,
+                    },
+                    bottom: {
+                      style: BorderStyle.NONE,
+                    },
+                    left: {
+                      style: BorderStyle.NONE,
+                    },
+                    right: {
+                      style: BorderStyle.NONE,
+                    },
                   },
                 }),
               ],

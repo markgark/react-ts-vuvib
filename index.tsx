@@ -14,9 +14,9 @@ import {
   TableCell,
   TableRow,
   VerticalAlign,
-  HorizontalPositionAlign,
   WidthType,
   BorderStyle,
+  TextRun,
 } from 'docx';
 import { Footer, Header } from 'docx/build/file/header';
 import { TableRow } from 'docx/build/file/TableRow';
@@ -61,9 +61,9 @@ class App extends Component<AppProps, AppState> {
       'https://cdn.jsdelivr.net/gh/markgark/react-ts-vuvib@main/imagenes/logo-senescyt.jpeg'
     ).then((r) => r.blob());
   
-    // const gobiernodetodos = await fetch(
-    //     'https://cdn.jsdelivr.net/gh/markgark/react-ts-vuvib@main/imagenes/gobierno-de-todos.png'
-    // ).then((r) => r.blob());
+    const gobiernodetodos = await fetch(
+        'https://cdn.jsdelivr.net/gh/markgark/react-ts-vuvib@main/imagenes/gobierno-de-todos.png'
+    ).then((r) => r.blob());
      
     const texto = 'CONSIDERANDO: Que ..... RESUELVE';
     const articulo1 =
@@ -111,7 +111,6 @@ class App extends Component<AppProps, AppState> {
                             }),
                           ],
                           verticalAlign: VerticalAlign.CENTER,
-                          //children: [new Paragraph("Aqui va el escudo nacional")],
                         }),
                         new TableCell({
                           children: [
@@ -129,7 +128,6 @@ class App extends Component<AppProps, AppState> {
                             }),
                           ],
                           verticalAlign: VerticalAlign.CENTER,
-                          //children: [new Paragraph("Aquí va el logo de senescyt")],
                         }),
                       ],
                     }),
@@ -156,14 +154,85 @@ class App extends Component<AppProps, AppState> {
               ],
             }),
           },
+
+
           footers: {
             default: new Footer({
               children: [
-                new Paragraph(
-                  'Dirección: Edificio Matriz: Alpallana E7-183 entre Av. Diego de Almagro y Whymper'
-                ),
-                new Paragraph('Código Postal: 170518 / Quito - Ecuador'),
-                new Paragraph('Teléfono: 593-2 3934-300'),
+                new Table({
+                  rows: [
+                    new TableRow({
+                      children: [
+                        new TableCell({
+                          children: [
+                            new Paragraph({
+                              children:[
+                                new TextRun({
+                                  text: "Dirección: Edificio Matriz: Alpallana E7-183 entre Av. Diego de Almagro y Whymper",
+                                  font: "Arial",
+                                  size: 12
+                                }),
+                              ]
+                            }),
+                            new Paragraph({
+                              children:[
+                                new TextRun({
+                                  text: "Código Postal: 170518 / Quito - Ecuador",
+                                  font: "Arial",
+                                  size: 12
+                                }),
+                              ]
+                            }),
+                            new Paragraph({
+                              children:[
+                                new TextRun({
+                                  text: "Teléfono: 593-2 3934-300",
+                                  font: "Arial",
+                                  size: 12
+                                }),
+                              ]
+                            }),
+                          ],
+                        }),
+                        new TableCell({
+                          children: [
+                            new Paragraph({
+                              children: [
+                                new ImageRun({
+                                  data: gobiernodetodos,
+                                  transformation: {
+                                    width: 190,
+                                    height: 66,
+                                  },
+                                }),
+                              ],
+                              //HorizontalPositionAlign: HorizontalPositionAlign.RIGHT,
+                            }),
+                          ],
+                          verticalAlign: VerticalAlign.CENTER,
+                        }),
+                      ],
+                    }),
+                  ],
+                  width: {
+                    size: 100,
+                    type: WidthType.PERCENTAGE,
+                  },
+                  borders: {
+                    top: {
+                      style: BorderStyle.NONE,
+                    },
+                    bottom: {
+                      style: BorderStyle.NONE,
+                    },
+                    left: {
+                      style: BorderStyle.NONE,
+                    },
+                    right: {
+                      style: BorderStyle.NONE,
+                    },
+                  },
+                }),
               ],
             }),
           },

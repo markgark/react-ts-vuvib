@@ -14,6 +14,7 @@ import {
   TableCell,
   TableRow,
   VerticalAlign,
+  HorizontalPositionAlign,
   WidthType,
   BorderStyle,
 } from 'docx';
@@ -22,6 +23,7 @@ import { TableRow } from 'docx/build/file/TableRow';
 import { TableCell } from 'docx/build/file/TableCell';
 import ReactFileReader from 'react-file-reader';
 import { useState } from 'react';
+import { HorizontalPositionRelativeFrom } from 'docx/build/file/drawing/floating/floating-position';
 
 interface AppProps {}
 interface AppState {
@@ -51,13 +53,13 @@ class App extends Component<AppProps, AppState> {
     //   'https://raw.githubusercontent.com/dolanmiu/docx/master/demo/images/cat.jpg'
     // ).then((r) => r.blob());
 
-    // const escudo = await fetch(
-    //   'https://cdn.jsdelivr.net/gh/markgark/react-ts-vuvib@main/imagenes/gobierno-de-todos.png'
-    //   ).then((r) => r.blob())
+    const escudo = await fetch(
+      'https://cdn.jsdelivr.net/gh/markgark/react-ts-vuvib@main/imagenes/republica-ecuador-escudo.png'
+      ).then((r) => r.blob())
   
-    // const senescyt = await fetch(
-    //     'https://cdn.jsdelivr.net/gh/markgark/react-ts-vuvib@main/imagenes/logo-senecsyt.jpeg'
-    // ).then((r) => r.blob());
+    const senescyt = await fetch(
+      'https://cdn.jsdelivr.net/gh/markgark/react-ts-vuvib@main/imagenes/logo-senescyt.jpeg'
+    ).then((r) => r.blob());
   
     // const gobiernodetodos = await fetch(
     //     'https://cdn.jsdelivr.net/gh/markgark/react-ts-vuvib@main/imagenes/gobierno-de-todos.png'
@@ -96,43 +98,37 @@ class App extends Component<AppProps, AppState> {
                       children: [
                         new TableCell({
                           children: [
-                            // new Paragraph({
-                            //   children: [
-                            //     new ImageRun({
-                            //       data: blob,
-                            //       transformation: {
-                            //         width: 100,
-                            //         height: 100,
-                            //       },
-                            //     }),
-                            //   ],
-                            // }),
-                            // new ImageRun({
-                            //   data: escudo,
-                            //   transformation: {
-                            //       width: 25,
-                            //       height: 25,
-                            //   },
-                            // }),
-                            new Paragraph('Aquisito va el escudo nacional'),
+                            new Paragraph({
+                              children: [
+                                new ImageRun({
+                                  data: escudo,
+                                  transformation: {
+                                    width: 175,
+                                    height: 94,
+                                  },
+                                }),
+                              ],
+                            }),
                           ],
+                          verticalAlign: VerticalAlign.CENTER,
                           //children: [new Paragraph("Aqui va el escudo nacional")],
                         }),
                         new TableCell({
                           children: [
-                            // new Paragraph({
-                            //   children: [
-                            //     new ImageRun({
-                            //       data: blob,
-                            //       transformation: {
-                            //         width: 100,
-                            //         height: 100,
-                            //       },
-                            //     }),
-                            //   ],
-                            // }),
-                            new Paragraph('Aqui va el logo de senescyt'),
+                            new Paragraph({
+                              children: [
+                                new ImageRun({
+                                  data: senescyt,
+                                  transformation: {
+                                    width: 300,
+                                    height: 32,
+                                  },
+                                }),
+                              ],
+                              //HorizontalPositionAlign: HorizontalPositionAlign.RIGHT,
+                            }),
                           ],
+                          verticalAlign: VerticalAlign.CENTER,
                           //children: [new Paragraph("Aquí va el logo de senescyt")],
                         }),
                       ],

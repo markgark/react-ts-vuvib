@@ -292,6 +292,7 @@ class App extends Component<AppProps, AppState> {
     const startPDf = () => {
     new Paragraph("estoy en la función")
     return
+    
     // for(let i = 0; i <  1; i++){
     //     new TableRow({
     //         children: [
@@ -390,7 +391,8 @@ class App extends Component<AppProps, AppState> {
             new Paragraph(''),
             new Paragraph(''),
             tableColumns,
-            //this.startPDf,
+            //this.props.startPDf(),
+
             new Paragraph(''),
             new Paragraph(articulo1),
             new Paragraph(''),

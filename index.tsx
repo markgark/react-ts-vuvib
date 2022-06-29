@@ -60,7 +60,6 @@ class App extends Component<AppProps, AppState> {
       elContenido = file.result;
 
       const docword = new Document({
-
         sections: [
           {
             children: [
@@ -79,6 +78,22 @@ class App extends Component<AppProps, AppState> {
           }
         ]
       })
+
+      //function parrafos() {
+        // for (let i = 0; i < splitStr.length; i++) {
+        //   new Paragraph({
+        //     alignment: AlignmentType.JUSTIFIED,
+        //     children:[
+        //       new TextRun({
+        //         //text: elContenido,
+        //         text: splitStr[i],
+        //         font: "Arial",
+        //         size: 24,
+        //       }),
+        //     ]
+        //  })
+        // } 
+      //};
   
       Packer.toBlob(docword).then((blob) => {
           console.log(blob);

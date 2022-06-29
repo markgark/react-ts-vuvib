@@ -289,58 +289,59 @@ class App extends Component<AppProps, AppState> {
         },
     }),
 
-  const startPDf = () => {
-    
-    for(let i = 0; i <  1; i++){
-        new TableRow({
-            children: [
-              new TableCell({
-                children: [
-                  new Paragraph({
-                    children:[
-                      new TextRun({
-                        text: `id ${FakeDataJson[i].id}`
-                      })
-                    ]
-                  })
-                ]
-              }),
-              new TableCell({
-                children: [
-                  new Paragraph({
-                    children:[
-                      new TextRun({
-                        text: `name ${FakeDataJson[i].name}`
-                      })
-                    ]
-                  })
-                ]
-              }),
-              new TableCell({
-                children: [
-                  new Paragraph({
-                    children:[
-                      new TextRun({
-                        text: `country ${FakeDataJson[i].country}`
-                      })
-                    ]
-                  })
-                ]
-              }),
-              new TableCell({
-                children: [
-                  new Paragraph({
-                    children:[
-                      new TextRun({
-                        text: `age ${FakeDataJson[i].age}`
-                      })
-                    ]
-                  })
-                ]
-              }),
-            ]
-        })
-    }
+    const startPDf = () => {
+    new Paragraph("estoy en la función")
+    return
+    // for(let i = 0; i <  1; i++){
+    //     new TableRow({
+    //         children: [
+    //           new TableCell({
+    //             children: [
+    //               new Paragraph({
+    //                 children:[
+    //                   new TextRun({
+    //                     text: `id ${FakeDataJson[i].id}`
+    //                   })
+    //                 ]
+    //               })
+    //             ]
+    //           }),
+    //           new TableCell({
+    //             children: [
+    //               new Paragraph({
+    //                 children:[
+    //                   new TextRun({
+    //                     text: `name ${FakeDataJson[i].name}`
+    //                   })
+    //                 ]
+    //               })
+    //             ]
+    //           }),
+    //           new TableCell({
+    //             children: [
+    //               new Paragraph({
+    //                 children:[
+    //                   new TextRun({
+    //                     text: `country ${FakeDataJson[i].country}`
+    //                   })
+    //                 ]
+    //               })
+    //             ]
+    //           }),
+    //           new TableCell({
+    //             children: [
+    //               new Paragraph({
+    //                 children:[
+    //                   new TextRun({
+    //                     text: `age ${FakeDataJson[i].age}`
+    //                   })
+    //                 ]
+    //               })
+    //             ]
+    //           }),
+    //         ]
+    //     })
+    // }
   }
 
   const doc = new Document({
@@ -388,8 +389,8 @@ class App extends Component<AppProps, AppState> {
             }),
             new Paragraph(''),
             new Paragraph(''),
-            //tableColumns,
-            startPDf(),
+            tableColumns,
+            //this.startPDf,
             new Paragraph(''),
             new Paragraph(articulo1),
             new Paragraph(''),

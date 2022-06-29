@@ -45,6 +45,9 @@ class App extends Component<AppProps, AppState> {
   onFileChange = (e) => {
     const archivoTexto = e.target.files[0];
     var elContenido = " ";
+
+    var myStr = "The main characters in Harry Potter are:" + "\n\t" + "Harry Potter" + "\n\t" + "Hermione Grainger" + "\n\t" + "Ronald Weasley" + "\n\t" + "Neville Longbottom" + "\n";
+
     var file = new FileReader();
     file.readAsText(archivoTexto);
     
@@ -60,7 +63,8 @@ class App extends Component<AppProps, AppState> {
               alignment: AlignmentType.JUSTIFIED,
               children:[
                 new TextRun({
-                  text: elContenido,
+                  //text: elContenido,
+                  text: myStr,
                   font: "Arial",
                   size: 24,
                 }),
@@ -75,12 +79,12 @@ class App extends Component<AppProps, AppState> {
           console.log(blob);
           saveAs(blob, 'example.docx');
           console.log('Documento creado exitosamente');
-        });  
+      }); 
   
     };
-    if (file) {
-       console.log("si leyo")
-    }
+    // if (file) {
+    //    console.log("si leyo")
+    // }
 
   };
 

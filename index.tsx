@@ -20,15 +20,15 @@ import {
   TextRun,
   TableBorders
 } from 'docx';
-import { Footer, Header } from 'docx/build/file/header';
-import { TableRow } from 'docx/build/file/TableRow';
-import { TableCell } from 'docx/build/file/TableCell';
-import ReactFileReader from 'react-file-reader';
+//import { Footer, Header } from 'docx/build/file/header';
+//import { TableRow } from 'docx/build/file/TableRow';
+//import { TableCell } from 'docx/build/file/TableCell';
+//import ReactFileReader from 'react-file-reader';
 import { useState } from 'react';
 import { HorizontalPositionRelativeFrom } from 'docx/build/file/drawing/floating/floating-position';
-import { Alignment, AlignmentType } from 'docx/build/file/paragraph/formatting/alignment';
+//import { AlignmentType } from 'docx/build/file/paragraph/formatting/alignment';
 import { Align } from 'docx/build/file/drawing/floating/align';
-import pieCabeceraSenescyt from '/componentes/pieCabecera';
+import * as piecab from './componentes/pieCabecera';
 
 interface AppProps {}
 interface AppState {

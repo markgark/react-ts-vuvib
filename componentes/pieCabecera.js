@@ -1,21 +1,17 @@
 import {
   Document,
   ImageRun,
-  Header,
-  Footer,
   Table,
   TableCell,
   TableRow,
   VerticalAlign,
   AlignmentType,
   WidthType,
-  BorderStyle,
-  TextRun,
-  TableBorders
+  BorderStyle
 } from 'docx';
 import { Footer, Header } from 'docx/build/file/header';
 
-class pieCabeceraSenescyt extends React.Component {
+class pcSenescyt extends React.Component {
 
   escudo = await fetch(
     'https://cdn.jsdelivr.net/gh/markgark/react-ts-vuvib@main/imagenes/republica-ecuador-escudo.png'

@@ -44,12 +44,44 @@ class App extends Component<AppProps, AppState> {
 
   onFileChange = (e) => {
     const archivoTexto = e.target.files[0];
+    var elContenido = " ";
     var file = new FileReader();
-    console.log(file);
-    file.onload = (e) => {
-      console.log(file.result);
-    };
     file.readAsText(archivoTexto);
+    
+    file.onload = (e) => {
+      elContenido = file.result;
+
+      const docword = new Document({
+
+        sections: [
+          {
+            children: [
+            new Paragraph({
+              alignment: AlignmentType.JUSTIFIED,
+              children:[
+                new TextRun({
+                  text: elContenido,
+                  font: "Arial",
+                  size: 24,
+                }),
+              ]
+            }),
+           ]
+          }
+        ]
+      })
+  
+      Packer.toBlob(docword).then((blob) => {
+          console.log(blob);
+          saveAs(blob, 'example.docx');
+          console.log('Documento creado exitosamente');
+        });  
+  
+    };
+    if (file) {
+       console.log("si leyo")
+    }
+
   };
 
   async generateFromUrl() {

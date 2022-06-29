@@ -14,6 +14,7 @@ import {
   TableCell,
   TableRow,
   VerticalAlign,
+  AlignmentType,
   WidthType,
   BorderStyle,
   TextRun,
@@ -118,6 +119,7 @@ class App extends Component<AppProps, AppState> {
                         new TableCell({
                           children: [
                             new Paragraph({
+                              alignment: AlignmentType.END,
                               children: [
                                 new ImageRun({
                                   data: senescyt,
@@ -204,6 +206,7 @@ class App extends Component<AppProps, AppState> {
                         new TableCell({
                           children: [
                             new Paragraph({
+                              alignment: AlignmentType.END,
                               children: [
                                 new ImageRun({
                                   data: gobiernodetodos,
@@ -247,6 +250,16 @@ class App extends Component<AppProps, AppState> {
             }),
           },
           children: [
+            new Paragraph({
+              children:[
+                new TextRun({
+                  text: "En un principio Dios creó los cielos y la tierra",
+                  font: "Arial",
+                  bold: true,
+                  size: 24
+                }),
+              ]
+            }),
             new Paragraph(''),
             new Paragraph(''),
             new Paragraph(''),

@@ -91,162 +91,273 @@ class App extends Component<AppProps, AppState> {
       file.readAsText(archivoTexto);
     };
 
-    const doc = new Document({
+    const tableHeader = new Table({
+      rows: [
+        new TableRow({
+          children: [
+            new TableCell({
+              children: [
+                new Paragraph({
+                  children: [
+                    new ImageRun({
+                      data: escudo,
+                      transformation: {
+                        width: 175,
+                        height: 94,
+                      },
+                    }),
+                  ],
+                }),
+              ],
+              verticalAlign: VerticalAlign.CENTER,
+            }),
+            new TableCell({
+              children: [
+                new Paragraph({
+                  alignment: AlignmentType.END,
+                  children: [
+                    new ImageRun({
+                      data: senescyt,
+                      transformation: {
+                        width: 300,
+                        height: 32,
+                      },
+                    }),
+                  ],
+                  //HorizontalPositionAlign: HorizontalPositionAlign.RIGHT,
+                }),
+              ],
+              verticalAlign: VerticalAlign.CENTER,
+            }),
+          ],
+        }),
+      ],
+      width: {
+        size: 100,
+        type: WidthType.PERCENTAGE,
+      },
+      borders: {
+        top: {
+          style: BorderStyle.NONE,
+        },
+        bottom: {
+          style: BorderStyle.NONE,
+        },
+        left: {
+          style: BorderStyle.NONE,
+        },
+        right: {
+          style: BorderStyle.NONE,
+        },
+        insideVertical: {
+          style: BorderStyle.NONE,
+        }
+      },
+    }),
+
+    const tableFooter = new Table({
+      rows: [
+        new TableRow({
+          children: [
+            new TableCell({
+              children: [
+                new Paragraph({
+                  children:[
+                    new TextRun({
+                      text: "Dirección: Edificio Matriz: Alpallana E7-183 entre Av. Diego de Almagro y Whymper",
+                      font: "Arial",
+                      size: 12,
+                    }),
+                  ],
+                }),
+                new Paragraph({
+                  children:[
+                    new TextRun({
+                      text: "Código Postal: 170518 / Quito - Ecuador",
+                      font: "Arial",
+                      size: 12
+                    }),
+                  ]
+                }),
+                new Paragraph({
+                  children:[
+                    new TextRun({
+                      text: "Teléfono: 593-2 3934-300",
+                      font: "Arial",
+                      size: 12
+                    }),
+                  ]
+                }),
+              ],
+              verticalAlign: VerticalAlign.CENTER,
+            }),
+            new TableCell({
+              children: [
+                new Paragraph({
+                  alignment: AlignmentType.END,
+                  children: [
+                    new ImageRun({
+                      data: gobiernodetodos,
+                      transformation: {
+                        width: 190,
+                        height: 66,
+                      },
+                    }),
+                  ],
+                  // alineación de la figura a la derecha
+                }),
+              ],
+              verticalAlign: VerticalAlign.CENTER,
+            }),
+          ],
+        }),
+      ],
+      width: {
+        size: 100,
+        type: WidthType.PERCENTAGE,
+      },
+      borders: {
+        top: {
+          style: BorderStyle.NONE,
+        },
+        bottom: {
+          style: BorderStyle.NONE,
+        },
+        left: {
+          style: BorderStyle.NONE,
+        },
+        right: {
+          style: BorderStyle.NONE,
+        },
+        insideVertical: {
+          style: BorderStyle.NONE,
+        }
+      },
+    }),
+
+
+    const FakeDataJson = [
+      {
+        "id": 1,
+        "name": "Charly",
+        "country": "USA",
+        "age": 20
+      },
+      {
+        "id": 2,
+        "name": "Alejandra",
+        "country": "México",
+        "age": 22
+      },
+      {
+        "id": 3,
+        "name": "Harry",
+        "country": "London",
+        "age": 26
+      }
+     ]
+  
+    const tableColumns = new Table({
+      rows: [
+          new TableRow({
+              children: [
+                  new TableCell({
+                      children: [
+                        new Paragraph("Identificador")
+                      ],
+                  }),
+                  new TableCell({
+                      children: [new Paragraph("Nombres y apellidos")
+                    ],
+                  }),
+                  new TableCell({
+                      children: [
+                        new Paragraph("Nacionalidad")
+                      ],
+                  }),
+                  new TableCell({
+                      children: [
+                        new Paragraph("Edad")
+                      ],
+                  }),
+              ],
+          }),
+        ],
+        width: {
+          size: 100,
+          type: WidthType.PERCENTAGE,
+        },
+    }),
+
+  const startPDf = () => {
+    
+    for(let i = 0; i <  1; i++){
+        new TableRow({
+            children: [
+              new TableCell({
+                children: [
+                  new Paragraph({
+                    children:[
+                      new TextRun({
+                        text: `id ${FakeDataJson[i].id}`
+                      })
+                    ]
+                  })
+                ]
+              }),
+              new TableCell({
+                children: [
+                  new Paragraph({
+                    children:[
+                      new TextRun({
+                        text: `name ${FakeDataJson[i].name}`
+                      })
+                    ]
+                  })
+                ]
+              }),
+              new TableCell({
+                children: [
+                  new Paragraph({
+                    children:[
+                      new TextRun({
+                        text: `country ${FakeDataJson[i].country}`
+                      })
+                    ]
+                  })
+                ]
+              }),
+              new TableCell({
+                children: [
+                  new Paragraph({
+                    children:[
+                      new TextRun({
+                        text: `age ${FakeDataJson[i].age}`
+                      })
+                    ]
+                  })
+                ]
+              }),
+            ]
+        })
+    }
+  }
+
+  const doc = new Document({
       sections: [
         {
           headers: {
             default: new Header({
               children: [
-                new Table({
-                  rows: [
-                    new TableRow({
-                      children: [
-                        new TableCell({
-                          children: [
-                            new Paragraph({
-                              children: [
-                                new ImageRun({
-                                  data: escudo,
-                                  transformation: {
-                                    width: 175,
-                                    height: 94,
-                                  },
-                                }),
-                              ],
-                            }),
-                          ],
-                          verticalAlign: VerticalAlign.CENTER,
-                        }),
-                        new TableCell({
-                          children: [
-                            new Paragraph({
-                              alignment: AlignmentType.END,
-                              children: [
-                                new ImageRun({
-                                  data: senescyt,
-                                  transformation: {
-                                    width: 300,
-                                    height: 32,
-                                  },
-                                }),
-                              ],
-                              //HorizontalPositionAlign: HorizontalPositionAlign.RIGHT,
-                            }),
-                          ],
-                          verticalAlign: VerticalAlign.CENTER,
-                        }),
-                      ],
-                    }),
-                  ],
-                  width: {
-                    size: 100,
-                    type: WidthType.PERCENTAGE,
-                  },
-                  borders: {
-                    top: {
-                      style: BorderStyle.NONE,
-                    },
-                    bottom: {
-                      style: BorderStyle.NONE,
-                    },
-                    left: {
-                      style: BorderStyle.NONE,
-                    },
-                    right: {
-                      style: BorderStyle.NONE,
-                    },
-                    insideVertical: {
-                      style: BorderStyle.NONE,
-                    }
-                  },
-                }),
+                tableHeader,
               ],
             }),
           },
 
-
           footers: {
             default: new Footer({
               children: [
-                new Table({
-                  rows: [
-                    new TableRow({
-                      children: [
-                        new TableCell({
-                          children: [
-                            new Paragraph({
-                              children:[
-                                new TextRun({
-                                  text: "Dirección: Edificio Matriz: Alpallana E7-183 entre Av. Diego de Almagro y Whymper",
-                                  font: "Arial",
-                                  size: 12,
-                                }),
-                              ],
-                            }),
-                            new Paragraph({
-                              children:[
-                                new TextRun({
-                                  text: "Código Postal: 170518 / Quito - Ecuador",
-                                  font: "Arial",
-                                  size: 12
-                                }),
-                              ]
-                            }),
-                            new Paragraph({
-                              children:[
-                                new TextRun({
-                                  text: "Teléfono: 593-2 3934-300",
-                                  font: "Arial",
-                                  size: 12
-                                }),
-                              ]
-                            }),
-                          ],
-                          verticalAlign: VerticalAlign.CENTER,
-                        }),
-                        new TableCell({
-                          children: [
-                            new Paragraph({
-                              alignment: AlignmentType.END,
-                              children: [
-                                new ImageRun({
-                                  data: gobiernodetodos,
-                                  transformation: {
-                                    width: 190,
-                                    height: 66,
-                                  },
-                                }),
-                              ],
-                              // alineación de la figura a la derecha
-                            }),
-                          ],
-                          verticalAlign: VerticalAlign.CENTER,
-                        }),
-                      ],
-                    }),
-                  ],
-                  width: {
-                    size: 100,
-                    type: WidthType.PERCENTAGE,
-                  },
-                  borders: {
-                    top: {
-                      style: BorderStyle.NONE,
-                    },
-                    bottom: {
-                      style: BorderStyle.NONE,
-                    },
-                    left: {
-                      style: BorderStyle.NONE,
-                    },
-                    right: {
-                      style: BorderStyle.NONE,
-                    },
-                    insideVertical: {
-                      style: BorderStyle.NONE,
-                    }
-                  },
-                }),
+                 tableFooter,
               ],
             }),
           },
@@ -276,8 +387,9 @@ class App extends Component<AppProps, AppState> {
               ]
             }),
             new Paragraph(''),
-            new Paragraph(archivoTexto),
             new Paragraph(''),
+            //tableColumns,
+            startPDf(),
             new Paragraph(''),
             new Paragraph(articulo1),
             new Paragraph(''),

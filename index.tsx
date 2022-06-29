@@ -46,9 +46,14 @@ class App extends Component<AppProps, AppState> {
     const archivoTexto = e.target.files[0];
     var elContenido = " ";
 
-    var myStr = "The main characters in Harry Potter are:" + "\n\t" + "Harry Potter" + "\n\t" + "Hermione Grainger" + "\n\t" + "Ronald Weasley" + "\n\t" + "Neville Longbottom" + "\n";
+    var myStr = "The main characters in Harry Potter are:" + "\n\t" + "Harry Potter" + "\n" + "Hermione Grainger" + "\n" + "Ronald Weasley" + "\n" + "Neville Longbottom" + "\n";
+
+    var splitStr = myStr.split(/\r?\n/);
+    console.log(myStr);
+    console.log(splitStr);
 
     var file = new FileReader();
+
     file.readAsText(archivoTexto);
     
     file.onload = (e) => {
@@ -64,7 +69,7 @@ class App extends Component<AppProps, AppState> {
               children:[
                 new TextRun({
                   //text: elContenido,
-                  text: myStr,
+                  text: splitStr[2],
                   font: "Arial",
                   size: 24,
                 }),

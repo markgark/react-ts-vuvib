@@ -250,10 +250,12 @@ class App extends Component<AppProps, AppState> {
             }),
           },
           children: [
+            new Paragraph('CONSIDERANDO:'),
+            new Paragraph(''),
             new Paragraph({
               children:[
                 new TextRun({
-                  text: "En un principio Dios creó los cielos y la tierra",
+                  text: "QUE en un principio Dios creó los cielos y la tierra",
                   font: "Arial",
                   bold: true,
                   size: 24

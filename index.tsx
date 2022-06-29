@@ -28,6 +28,7 @@ import { useState } from 'react';
 import { HorizontalPositionRelativeFrom } from 'docx/build/file/drawing/floating/floating-position';
 import { Alignment, AlignmentType } from 'docx/build/file/paragraph/formatting/alignment';
 import { Align } from 'docx/build/file/drawing/floating/align';
+import pieCabeceraSenescyt from '/componentes/pieCabecera';
 
 interface AppProps {}
 interface AppState {

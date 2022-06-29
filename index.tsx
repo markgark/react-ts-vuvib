@@ -68,7 +68,8 @@ class App extends Component<AppProps, AppState> {
     const gobiernodetodos = await fetch(
         'https://cdn.jsdelivr.net/gh/markgark/react-ts-vuvib@main/imagenes/gobierno-de-todos.png'
     ).then((r) => r.blob());
-     
+    
+    const considerando = "Que el artículo 14 de la Constitución de la República del Ecuador, publicada en el Registro Oficial No. 449 de 20 de octubre de 2008, reconoce el derecho a la población a vivir en un ambiente sano y ecológicamente equilibrado, garantizando sostenibilidad y el buen vivir; además, se declara de interés público la biodiversidad y la integridad del patrimonio genético del país;";
     const texto = 'CONSIDERANDO: Que ..... RESUELVE';
     const articulo1 =
       'Artículo 1.- Otorgar a [NOMBRE DEL SOLICITANTE] la autorización para desarrollar la investigación [TÍTULO DEL PROYECTO] por el plazo de [PLAZO DEL PROYECTO].';
@@ -250,6 +251,7 @@ class App extends Component<AppProps, AppState> {
             }),
           },
           children: [
+            new Paragraph(''),
             new Paragraph('CONSIDERANDO:'),
             new Paragraph(''),
             new Paragraph({
@@ -263,7 +265,16 @@ class App extends Component<AppProps, AppState> {
               ]
             }),
             new Paragraph(''),
-            new Paragraph(''),
+            new Paragraph({
+              alignment: AlignmentType.JUSTIFIED,
+              children:[
+                new TextRun({
+                  text: considerando,
+                  font: "Arial",
+                  size: 24
+                }),
+              ]
+            }),
             new Paragraph(''),
             new Paragraph(archivoTexto),
             new Paragraph(''),

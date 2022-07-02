@@ -59,26 +59,57 @@ class App extends Component<AppProps, AppState> {
     
     file.onload = (e) => {
       elContenido = file.result;
+      const strElContenido = elContenido.split("\n\n");
 
       const docword = new Document({
         sections: [
           {
             children: [
-            new Paragraph({
-              alignment: AlignmentType.JUSTIFIED,
-              children:[
-                new TextRun({
-                  //text: elContenido,
-                  text: splitStr[2],
-                  font: "Arial",
-                  size: 24,
-                }),
-              ]
-            }),
+            //new Paragraph({
+            //   alignment: AlignmentType.JUSTIFIED,
+            //   children:[
+            //     new TextRun({
+            //       text: elContenido,
+            //       font: "Arial",
+            //       size: 24,
+            //     }),
+            //   ],
+            // }),
+            // new Paragraph({
+            //   alignment: AlignmentType.CENTER,
+            //   children:[
+            //     new TextRun({
+            //       text: splitStr[2],
+            //       font: "Arial",
+            //       size: 24,
+            //     }),
+            //   ]
+            // }),
+            
+            parrafo.forEach(strEcContenido => {
+            arr.push(this.crearParrafo(parrafo));
+            });
            ]
           }
         ]
       })
+
+      function crearParrafo(parrafo: string): Paragraph {
+        return new Paragraph({
+          text: parrafo
+        });
+      }
+
+      function splitContenido(text: string): string[] {
+        return text.split("\n\n");
+      }
+
+            //     const bulletPoints = this.splitParagraphIntoBullets(
+            //       education.notes
+            //     );
+            //     bulletPoints.forEach(bulletPoint => {
+            //       arr.push(this.createBullet(bulletPoint));
+            //     });
 
       //function parrafos() {
         // for (let i = 0; i < splitStr.length; i++) {

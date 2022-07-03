@@ -96,21 +96,46 @@ class App extends Component<AppProps, AppState> {
               }),
             },
             children: [
+
+            crearParrafoCentrado("RESOLUCIÓN No. SENESCYT-SIITT-ABS-20XX–0XX"),
+            crearParrafoCentrado("[ NOMBRE DE LA AUTORIDAD ]"),
+            crearParrafoCentrado("SUBSECRETARÍA DE INVESTIGACIÓN, INNOVACIÓN TRANSFERENCIA DE TECNOLOGÍA"),
+            crearParrafoCentrado("CONSIDERANDO:"),
+
             new Paragraph(" "),
             ...parrafos
               .map(parrafo => {
                 const arr: Paragraph[] = [];
-                arr.push(crearTexto(parrafo));
+                arr.push(crearParrafo(parrafo));
                 return arr;
               })
               .reduce((prev, curr) => prev.concat(curr), []),
+
+              crearParrafoCentrado("RESUELVE:"),
+              
+              crearParrafo("Artículo 1.- Otorgar a [NOMBRE DEL SOLICITANTE] la autorización para desarrollar la investigación [TÍTULO DEL PROYECTO] por el plazo de [PLAZO DEL PROYECTO]."),
+              
+              crearParrafoCentrado("DISPOSICIONES FINALES"),
+              
+              crearParrafo("Primera.- De la ejecución de la presente Resolución, encárguese a la Dirección de Investigación Científica de la Secretaría de Educación Superior, Ciencia, Tecnología e Innovación."),
+              
+              crearParrafo("Segunda.- La notificación de la presente Resolución será realizada por la Dirección de Investigación Científica, de conformidad a lo dispuesto en el Acuerdo Nro. SENESCYT-."),
+              
+              crearParrafo("Tercera.- La presente Resolución entrará en vigencia a partir de su suscripción, sin perjuicio de su publicación en el Registro Oficial."),
+            
+              crearParrafo("Dado en la ciudad de San Francisco de Quito, D.M. a los  xxxx (xx) días del mes de xxxxxx de 20xx."), 
+              
+              crearParrafo("Comuníquese y Publíquese."),
+              
+              crearParrafoFirma("[NOMBRE DEL AUTORIZADOR PRINCIPAL DE SENESCYT]",
+              "[CARGO DEL AUTORIZADOR PRINCIPAL DE SENESCYT]"),
+
             ]
           }
         ]
       }),
 
-
-      function crearTexto(texto: string): Paragraph {
+      function crearParrafo(texto: string): Paragraph {
         return new Paragraph({
           children: [
             new TextRun({
@@ -120,6 +145,40 @@ class App extends Component<AppProps, AppState> {
             }),
           ],
           alignment: AlignmentType.JUSTIFIED,
+        });
+      }
+
+      function crearParrafoCentrado(texto: string): Paragraph {
+        return new Paragraph({
+          children: [
+            new TextRun({
+                break: 1,
+                text: texto,
+                font: "Arial",
+                bold: true
+            }),
+          ],
+          alignment: AlignmentType.CENTER,
+        });
+      }
+
+      function crearParrafoFirma(texto1: string,texto2: string): Paragraph {
+        return new Paragraph({
+          children: [
+            new TextRun({
+                break: 5,
+                text: texto1,
+                font: "Arial",
+               // bold: true
+            }),
+            new TextRun({
+              break: 1,
+              text: texto2,
+              font: "Arial",
+              bold: true
+          }),
+          ],
+          alignment: AlignmentType.CENTER,
         });
       }
 

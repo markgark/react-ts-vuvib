@@ -42,10 +42,11 @@ class App extends Component<AppProps, AppState> {
       name: 'VUVib',
     };
   }
+  
 
   onFileChange = (e) => {
+    console.log("este es el archivo", e.target.files[0]);
     const archivoTexto = e.target.files[0];
-    var elContenido = " ";
 
     var myStr = "The main characters in Harry Potter are:" + "\n\t" + "Harry Potter" + "\n" + "Hermione Grainger" + "\n" + "Ronald Weasley" + "\n" + "Neville Longbottom" + "\n";
 
@@ -58,41 +59,48 @@ class App extends Component<AppProps, AppState> {
     file.readAsText(archivoTexto);
     
     file.onload = (e) => {
-      elContenido = file.result;
-      const strElContenido = elContenido.split("\n\n");
+      const elContenido = file.result;
+      //console.log(elContenido)
+      //var parrafos [] = elContenido.split("\n\n");
+      let parrafos = splitContenido(elContenido);
 
       const docword = new Document({
         sections: [
           {
             children: [
-            //new Paragraph({
-            //   alignment: AlignmentType.JUSTIFIED,
-            //   children:[
-            //     new TextRun({
-            //       text: elContenido,
-            //       font: "Arial",
-            //       size: 24,
-            //     }),
-            //   ],
+
+            new Paragraph(" "),
+            // parrafos.forEach(parrafo => {
+            //  parrafos.push(this.crearParrafo(parrafo));
             // }),
-            // new Paragraph({
-            //   alignment: AlignmentType.CENTER,
-            //   children:[
-            //     new TextRun({
-            //       text: splitStr[2],
-            //       font: "Arial",
-            //       size: 24,
-            //     }),
-            //   ]
-            // }),
-            
-            parrafo.forEach(strEcContenido => {
-            arr.push(this.crearParrafo(parrafo));
-            });
+
+            parrafos.forEach(parrafo => {console.log(parrafo)}), 
+            parrafos.forEach(parrafo => {(crearParrafo(parrafo))}),
+
+            new Paragraph({
+              alignment: AlignmentType.JUSTIFIED,
+              children:[
+                new TextRun({
+                  text: elContenido,
+                  font: "Arial",
+                  size: 24,
+                }),
+              ],
+            }),
+            new Paragraph({
+              alignment: AlignmentType.CENTER,
+              children:[
+                new TextRun({
+                  text: splitStr[2],
+                  font: "Arial",
+                  size: 24,
+                }),
+              ]
+            }),
            ]
           }
         ]
-      })
+      }),
 
       function crearParrafo(parrafo: string): Paragraph {
         return new Paragraph({

@@ -14,6 +14,7 @@ import {
   TableCell,
   TableRow,
   VerticalAlign,
+  Alignment,
   AlignmentType,
   WidthType,
   BorderStyle,
@@ -29,6 +30,7 @@ import { HorizontalPositionRelativeFrom } from 'docx/build/file/drawing/floating
 //import { AlignmentType } from 'docx/build/file/paragraph/formatting/alignment';
 import { Align } from 'docx/build/file/drawing/floating/align';
 import * as piecab from './componentes/pieCabecera';
+import { TextDirection } from 'docx/build/file/table/table-cell/table-cell-components';
 
 interface AppProps {}
 interface AppState {
@@ -48,63 +50,76 @@ class App extends Component<AppProps, AppState> {
     console.log("este es el archivo", e.target.files[0]);
     const archivoTexto = e.target.files[0];
 
+    const escudo = fetch(
+      'https://cdn.jsdelivr.net/gh/markgark/react-ts-vuvib@main/imagenes/republica-ecuador-escudo.png'
+      ).then((r) => r.blob())
+    
+    const senescyt = fetch(
+      'https://cdn.jsdelivr.net/gh/markgark/react-ts-vuvib@main/imagenes/logo-senescyt.jpeg'
+    ).then((r) => r.blob());
+    
+    const gobiernodetodos = fetch(
+        'https://cdn.jsdelivr.net/gh/markgark/react-ts-vuvib@main/imagenes/gobierno-de-todos.png'
+    ).then((r) => r.blob());
+
     var myStr = "The main characters in Harry Potter are:" + "\n\t" + "Harry Potter" + "\n" + "Hermione Grainger" + "\n" + "Ronald Weasley" + "\n" + "Neville Longbottom" + "\n";
 
     var splitStr = myStr.split(/\r?\n/);
-    console.log(myStr);
-    console.log(splitStr);
-
     var file = new FileReader();
 
     file.readAsText(archivoTexto);
     
     file.onload = (e) => {
       const elContenido = file.result;
-      //console.log(elContenido)
-      //var parrafos [] = elContenido.split("\n\n");
       let parrafos = splitContenido(elContenido);
+      // console.log(parrafos.length);
+
+      // for(let j = 0; j < parrafos.length; j++){ 
+      //   console.log(parrafos[j]); 
+      // }
 
       const docword = new Document({
         sections: [
           {
+            headers: {
+              default: new Header({
+                children: [
+                  createLogoHeaderSenescyt(),
+                ],
+              }),
+            },
+            footers: {
+              default: new Footer({
+                children: [
+                   createLogoFooterSenescyt(),
+                ],
+              }),
+            },
             children: [
-
             new Paragraph(" "),
-            // parrafos.forEach(parrafo => {
-            //  parrafos.push(this.crearParrafo(parrafo));
-            // }),
-
-            parrafos.forEach(parrafo => {console.log(parrafo)}), 
-            parrafos.forEach(parrafo => {(crearParrafo(parrafo))}),
-
-            new Paragraph({
-              alignment: AlignmentType.JUSTIFIED,
-              children:[
-                new TextRun({
-                  text: elContenido,
-                  font: "Arial",
-                  size: 24,
-                }),
-              ],
-            }),
-            new Paragraph({
-              alignment: AlignmentType.CENTER,
-              children:[
-                new TextRun({
-                  text: splitStr[2],
-                  font: "Arial",
-                  size: 24,
-                }),
-              ]
-            }),
-           ]
+            ...parrafos
+              .map(parrafo => {
+                const arr: Paragraph[] = [];
+                arr.push(crearTexto(parrafo));
+                return arr;
+              })
+              .reduce((prev, curr) => prev.concat(curr), []),
+            ]
           }
         ]
       }),
 
-      function crearParrafo(parrafo: string): Paragraph {
+
+      function crearTexto(texto: string): Paragraph {
         return new Paragraph({
-          text: parrafo
+          children: [
+            new TextRun({
+                break: 1,
+                text: texto,
+                font: "Arial"
+            }),
+          ],
+          alignment: AlignmentType.JUSTIFIED,
         });
       }
 
@@ -112,29 +127,155 @@ class App extends Component<AppProps, AppState> {
         return text.split("\n\n");
       }
 
-            //     const bulletPoints = this.splitParagraphIntoBullets(
-            //       education.notes
-            //     );
-            //     bulletPoints.forEach(bulletPoint => {
-            //       arr.push(this.createBullet(bulletPoint));
-            //     });
+      function createLogoHeaderSenescyt(): Table {
+        return new Table({
+          rows: [
+            new TableRow({
+              children: [
+                new TableCell({
+                  children: [
+                    new Paragraph({
+                      children: [
+                        new ImageRun({
+                          data: escudo,
+                          transformation: {
+                            width: 175,
+                            height: 94,
+                          },
+                        }),
+                      ],
+                    }),
+                  ],
+                  verticalAlign: VerticalAlign.CENTER,
+                }),
+                new TableCell({
+                  children: [
+                    new Paragraph({
+                      alignment: AlignmentType.END,
+                      children: [
+                        new ImageRun({
+                          data: senescyt,
+                          transformation: {
+                            width: 300,
+                            height: 32,
+                          },
+                        }),
+                      ],
+                    }),
+                  ],
+                  verticalAlign: VerticalAlign.CENTER,
+                }),
+              ],
+            }),
+          ],
+          width: {
+            size: 100,
+            type: WidthType.PERCENTAGE,
+          },
+          borders: {
+            top: {
+              style: BorderStyle.NONE,
+            },
+            bottom: {
+              style: BorderStyle.NONE,
+            },
+            left: {
+              style: BorderStyle.NONE,
+            },
+            right: {
+              style: BorderStyle.NONE,
+            },
+            insideVertical: {
+              style: BorderStyle.NONE,
+            }
+          },
+        });
+      }
+    
+      // Colocar los logos en el pie de página del Documento 
+      // Dirección y logotipo de gobierno
+    
+      function createLogoFooterSenescyt(): Table {
+        return new Table({
+          rows: [
+            new TableRow({
+              children: [
+                new TableCell({
+                  children: [
+                    new Paragraph({
+                      children:[
+                        new TextRun({
+                          text: "Dirección: Edificio Matriz: Alpallana E7-183 entre Av. Diego de Almagro y Whymper",
+                          font: "Arial",
+                          size: 12,
+                        }),
+                      ],
+                    }),
+                    new Paragraph({
+                      children:[
+                        new TextRun({
+                          text: "Código Postal: 170518 / Quito - Ecuador",
+                          font: "Arial",
+                          size: 12
+                        }),
+                      ]
+                    }),
+                    new Paragraph({
+                      children:[
+                        new TextRun({
+                          text: "Teléfono: 593-2 3934-300",
+                          font: "Arial",
+                          size: 12
+                        }),
+                      ]
+                    }),
+                  ],
+                  verticalAlign: VerticalAlign.CENTER,
+                }),
+                new TableCell({
+                  children: [
+                    new Paragraph({
+                      alignment: AlignmentType.END,
+                      children: [
+                        new ImageRun({
+                          data: gobiernodetodos,
+                          transformation: {
+                            width: 190,
+                            height: 66,
+                          },
+                        }),
+                      ],
+                    }),
+                  ],
+                  verticalAlign: VerticalAlign.CENTER,
+                }),
+              ],
+            }),
+          ],
+          width: {
+            size: 100,
+            type: WidthType.PERCENTAGE,
+          },
+          borders: {
+            top: {
+              style: BorderStyle.NONE,
+            },
+            bottom: {
+              style: BorderStyle.NONE,
+            },
+            left: {
+              style: BorderStyle.NONE,
+            },
+            right: {
+              style: BorderStyle.NONE,
+            },
+            insideVertical: {
+              style: BorderStyle.NONE,
+            }
+          },
+        });
+      }
 
-      //function parrafos() {
-        // for (let i = 0; i < splitStr.length; i++) {
-        //   new Paragraph({
-        //     alignment: AlignmentType.JUSTIFIED,
-        //     children:[
-        //       new TextRun({
-        //         //text: elContenido,
-        //         text: splitStr[i],
-        //         font: "Arial",
-        //         size: 24,
-        //       }),
-        //     ]
-        //  })
-        // } 
-      //};
-  
       Packer.toBlob(docword).then((blob) => {
           console.log(blob);
           saveAs(blob, 'example.docx');
@@ -142,9 +283,6 @@ class App extends Component<AppProps, AppState> {
       }); 
   
     };
-    // if (file) {
-    //    console.log("si leyo")
-    // }
 
   };
 
